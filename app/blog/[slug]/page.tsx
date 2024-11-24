@@ -1,7 +1,7 @@
-import { getAllPosts } from "../../../lib/posts";
+import { getAllPosts, getPostBySlug } from "../../../lib/posts";
 import { remark } from "remark";
 import html from "remark-html";
-import { getPostBySlug } from "../../../lib/posts";
+
 export async function generateStaticParams() {
   const posts = getAllPosts();
 
@@ -10,12 +10,25 @@ export async function generateStaticParams() {
   }));
 }
 
+interface Post {
+  slug: string;
+  title: string;
+  date: string;
+  content: string;
+}
+
 export default async function PostPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const post = getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post: Partial<Post> | undefined = getPostBySlug(slug);
+
+  if (!post) {
+    return <p>Post not found</p>;
+  }
+
   const processedContent = await remark().use(html).process(post.content);
   const contentHtml = processedContent.toString();
 
