@@ -1,6 +1,8 @@
+import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "../../../lib/posts";
 import { remark } from "remark";
 import html from "remark-html";
+import { Post } from "@/types";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -10,24 +12,16 @@ export async function generateStaticParams() {
   }));
 }
 
-interface Post {
-  slug: string;
-  title: string;
-  date: string;
-  content: string;
-}
 
-export default async function PostPage(
-  props: {
-    params: Promise<{ slug: string }>;
-  }
-) {
+export default async function PostPage(props: {
+  params: Promise<{ slug: string }>;
+}) {
   const params = await props.params;
   const { slug } = params;
   const post: Partial<Post> | undefined = getPostBySlug(slug);
 
   if (!post) {
-    return <p>Post not found</p>;
+    notFound();
   }
 
   const processedContent = await remark().use(html).process(post.content);
