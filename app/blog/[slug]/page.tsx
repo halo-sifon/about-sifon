@@ -22,7 +22,7 @@ export default async function PostPage({
 }: {
   params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
   const post: Partial<Post> | undefined = getPostBySlug(slug);
 
   if (!post) {
