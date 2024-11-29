@@ -1,8 +1,17 @@
+---
+title: "配置ssl"
+date: "2024-11-29"
+category: "技术"
+---
+
 使用 Let's Encrypt 免费证书 需要先停止nginx服务
+
 sudo yum install certbot python3-certbot-nginx
 sudo certbot --nginx -d mp.sifon.top（自动配置，测试没完成）
+
 手动获取证书（备用方法）
 sudo certbot certonly --standalone -d mp.sifon.top
+
 添加 HTTPS 支持的配置：
 ```
 server {
