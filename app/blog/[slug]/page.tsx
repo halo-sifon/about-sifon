@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "../../../lib/posts";
+import { getAllPosts, getPostBySlug } from "@/lib/posts";
 import { remark } from "remark";
 import html from "remark-html";
 import { Post } from "@/types";
@@ -11,7 +11,6 @@ export async function generateStaticParams() {
     slug: post.slug,
   }));
 }
-
 
 export default async function PostPage(props: {
   params: Promise<{ slug: string }>;
