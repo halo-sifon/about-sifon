@@ -1,9 +1,13 @@
-import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
-import { remark } from "remark";
-import html from "remark-html";
 import { Post } from "@/types";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import rehypeRaw from "rehype-raw";
+import rehypeStringify from "rehype-stringify";
+import remarkGfm from "remark-gfm";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { unified } from "unified";
 
 // 动态设置页面的元数据
 export async function generateMetadata({
@@ -13,7 +17,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const slug = (await params).slug.join("/");
   const post = getPostBySlug(slug);
-  console.log({ slug, post });
 
   return {
     title: post?.title || "文章未找到",
@@ -40,8 +43,15 @@ export default async function PostPage(props: {
     notFound();
   }
 
-  const processedContent = await remark().use(html).process(post.content);
-  const contentHtml = processedContent.toString();
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeStringify)
+    .use(remarkGfm);
+
+  const file = await processor.process(post.content);
+  const contentHtml = file.toString();
 
   return (
     <article>
