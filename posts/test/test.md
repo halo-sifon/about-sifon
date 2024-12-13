@@ -5,40 +5,43 @@ category: "技术"
 description: "Pluto"
 ---
 
+<!-- https://sindresorhus.com/github-markdown-css/ -->
+
 # Pluto
 
-**Pluto** (minor-planet designation: _134340 Pluto_) is a
-[dwarf planet](https://en.wikipedia.org/wiki/Dwarf_planet) in the
+**Pluto** (minor-planet designation: *134340 Pluto*)
+is a
+[dwarf planet](https://en.wikipedia.org/wiki/Dwarf_planet)
+in the
 [Kuiper belt](https://en.wikipedia.org/wiki/Kuiper_belt).
 
 ## History
 
-In the 1840s, [Urbain Le Verrier](https://wikipedia.org/wiki/Urbain_Le_Verrier)
-used Newtonian mechanics to predict the position of the then-undiscovered planet
-[Neptune](https://wikipedia.org/wiki/Neptune) after analyzing perturbations in
-the orbit of [Uranus](https://wikipedia.org/wiki/Uranus).
+In the 1840s,
+[Urbain Le Verrier](https://wikipedia.org/wiki/Urbain_Le_Verrier)
+used Newtonian mechanics to predict the position of the
+then-undiscovered planet
+[Neptune](https://wikipedia.org/wiki/Neptune)
+after analyzing perturbations in the orbit of
+[Uranus](https://wikipedia.org/wiki/Uranus).
 
----
+***
 
 Just a link: www.nasa.gov.
 
-- Lists
-- [ ] todo
-- [x] done
+* Lists
+* [ ] todo
+* [x] done
 
 A table:
 
-| a   | b   |
-| --- | --- |
+| a | b |
+| - | - |
 
 <details><summary>Show example</summary>
 
 ```js
-console.log("Hi pluto!");
+console.log('Hi pluto!')
 ```
 
 </details>
-
-```
-halo
-```

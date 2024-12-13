@@ -1,14 +1,15 @@
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
 import { Post } from "@/types";
+import "github-markdown-css/github-markdown.css";
+import "highlight.js/styles/github.css";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import rehypeStringify from "rehype-stringify";
-import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
-
 // 动态设置页面的元数据
 export async function generateMetadata({
   params,
@@ -47,8 +48,10 @@ export default async function PostPage(props: {
     .use(remarkParse)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
-    .use(rehypeStringify)
-    .use(remarkGfm);
+    .use(rehypeHighlight, {
+      detect: true,
+    })
+    .use(rehypeStringify);
 
   const file = await processor.process(post.content);
   const contentHtml = file.toString();
@@ -57,7 +60,10 @@ export default async function PostPage(props: {
     <article>
       <h1>{post.title}</h1>
       <p>{post.date}</p>
-      <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+      <div
+        className="markdown-body"
+        dangerouslySetInnerHTML={{ __html: contentHtml }}
+      />
     </article>
   );
 }

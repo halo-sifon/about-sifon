@@ -1,3 +1,5 @@
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -13,7 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <body>{children}</body>
+      <body className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8">
+          {children}
+        </main>
+        <Footer></Footer>
+      </body>
     </html>
   );
 }
