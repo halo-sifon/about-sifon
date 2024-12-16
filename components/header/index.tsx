@@ -20,6 +20,11 @@ const Header = () => {
             </Link>
           </li>
           <li>
+            <Link href="/demo" className="hover:text-gray-600">
+              Demo
+            </Link>
+          </li>
+          <li>
             <Link href="/about" className="hover:text-gray-600">
               关于
             </Link>
