@@ -1,11 +1,11 @@
 "use client";
 
 import gsap from "gsap";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 interface GalleryImage {
   id: number;
-  src: string;
+  src: string | StaticImageData;
   title: string;
   width: number;
   height: number;
@@ -21,11 +21,12 @@ export default function Gallery({ images }: GalleryProps) {
     gsap.to(target, {
       scale: 0.95,
       duration: 0.2,
-      // ease: "power2.out",
+      ease: "power2.in",
       onComplete: () => {
         gsap.to(target, {
           scale: 1,
           duration: 0.3,
+          ease: "power1.out",
           // ease: "bounce.out",
           // ease: "elastic.out(1, 0.3)",
         });
@@ -39,14 +40,14 @@ export default function Gallery({ images }: GalleryProps) {
         {images.map(image => (
           <div
             key={image.id}
-            className="relative aspect-[3/2] cursor-pointer overflow-hidden rounded-lg"
+            className="relative aspect-[2/3] cursor-pointer overflow-hidden rounded-lg"
             onClick={e => handleImageClick(image, e)}
           >
             <Image
               src={image.src}
               alt={image.title}
               fill
-              className="object-cover transition-transform duration-300 hover:scale-110"
+              className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
