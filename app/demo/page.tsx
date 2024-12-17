@@ -41,7 +41,7 @@ const demoItems: DemoItem[] = [
   },
   {
     title: "实时通信",
-    description: "基于 WebSocket 的实时通信示例",
+    description: "基于 WebSocket 实时通信示例",
     link: "/demo/realtime",
     tags: ["WebSocket", "实时"]
   }

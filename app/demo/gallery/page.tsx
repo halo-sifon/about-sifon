@@ -1,41 +1,35 @@
+"use client";
+
 import Gallery from "@/app/components/Gallery";
 
-import image2 from "@/assets/images/gallery/2.jpeg";
-import image3 from "@/assets/images/gallery/3.jpeg";
-import image5 from "@/assets/images/gallery/5.jpeg";
-const images = [
+// 示例图片数据
+const galleryImages = [
   {
     id: 2,
-    src: image2,
-    title: "海洋风景",
-    width: 1920,
-    height: 1280,
+    src: "/images/demo/gallery-2.jpeg",
+    data: {
+      title: "图片标题1",
+      description: "图片描述1",
+    },
   },
   {
     id: 3,
-    src: image3,
-    title: "山川河流",
-    width: 1920,
-    height: 1280,
-  },
-
-  {
-    id: 5,
-    src: image5,
-    title: "森林小路",
-    width: 1920,
-    height: 1280,
+    src: "/images/demo/gallery-3.jpeg",
+    data: {
+      title: "图片标题2",
+      description: "图片描述2",
+    },
   },
 ];
 
-export default function GalleryPage() {
+export default function GalleryDemo() {
   return (
     <div className="max-w-7xl mx-auto p-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-4">图片画廊</h1>
+        <p className="text-gray-600">点击图片可查看大图。</p>
       </div>
-
-      <Gallery images={images} />
+      <Gallery images={galleryImages} />
     </div>
   );
 }
